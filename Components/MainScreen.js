@@ -10,34 +10,37 @@ export default class MainScreen extends React.Component {
   state = {
     currentText: "",
     Texts: [],
-    user: this.props.navigation.getParam("userName", "VOID USER")
+    user: this.props.navigation.getParam("userName", "VOID USER"),
+    shouldUpdate: true
   }
   onChangeText = (text) => {
     this.setState({currentText:text})
   }
   sendText = async() => {
+    this.setState({shouldUpdate:false}, async()=>{
     let dataToSend = {user:this.state.user, text:this.state.currentText}
-    responseJson = await POST(ip, dataToSend)
+    let responseJson = await POST(ip, dataToSend)
     this.setState({
       currentText: "",
       Texts: [{user:this.state.user, text:this.state.currentText, },
        ...this.state.Texts]
+    },()=>{this.setState({shouldUpdate: true})})
     })
   }
   update = async() =>{
     try{
-    responseJson = await GET(ip, 
-    this.state.Texts.length.toString())
+    var responseJson = await GET(ip, 
+    this.state.Texts.length.toString()) 
     }catch(err){console.log(err)}
     if(responseJson==0) return;
+    if(this.state.shouldUpdate)
     this.setState({Texts: [...responseJson.reverse(), ...this.state.Texts]})
   }
   renderChatBubble = ({item}) => <ChatBubble text={item.text} 
   isUser={item.user==this.state.user} userName={item.user}/>
 
   componentDidMount(){
-    this.update()
-    this.interval = setInterval(this.update, 4000)
+    this.interval = setInterval(this.update, 3000)
     }
   componentWillUnmount(){
     clearInterval(this.interval)
@@ -49,7 +52,7 @@ export default class MainScreen extends React.Component {
           <View style={styles.header}>
 
               <Image 
-              source={require('../Assets/StillVariables.jpg')}
+              source={require('../assets/StillVariables.jpg')}
               style={styles.groupImage}
               />
       

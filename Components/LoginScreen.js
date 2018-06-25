@@ -16,7 +16,7 @@ export default class LoginScreen extends React.Component {
           <Text>Enter Name</Text>
           <View style={{flexDirection: "row"}}>
           <TextInput style={styles.signIn} value={this.state.username} 
-          onChangeText={(t)=>this.setState({username:t})} autoFocus/>
+          onChangeText={(t)=>this.setState({username:t})} autoFocus underlineColorAndroid="transparent"/>
           <TouchableOpacity onPress={this.navigate}>
             <Ionicons name="ios-send" size={36} color="blue"
             style={{marginLeft: 8}}

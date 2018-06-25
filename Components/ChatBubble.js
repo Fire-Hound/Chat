@@ -8,8 +8,8 @@ import {
 let user;
 export default class ChatBubble extends React.PureComponent {
     render(){
-        user = this.props.isUser
-        userName = this.props.userName
+        let user = this.props.isUser
+        let userName = this.props.userName
         if(user){
             return (
                 <View style={styles.containerUser}>
