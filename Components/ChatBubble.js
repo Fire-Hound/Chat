@@ -2,20 +2,37 @@ import React, { Component } from "react";
 import { 
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    Dimensions
     } from "react-native";
 let user;
 export default class ChatBubble extends React.PureComponent {
     render(){
-        user = this.props.user
-
-        return (
-            <View style={user ? styles.containerUser : styles.containerFriend}>
-                <Text style={user ? styles.textUser : styles.textFriend}>
-                {this.props.text}
-                </Text>
-            </View>
-        );
+        user = this.props.isUser
+        userName = this.props.userName
+        if(user){
+            return (
+                <View style={styles.containerUser}>
+                    <Text style={styles.textUser}>
+                        {this.props.text}
+                    </Text>
+                </View>
+            );
+        }
+        else{
+            return (
+                <View>
+                    <Text style={styles.headerFriend}>
+                        {this.props.userName}
+                    </Text>
+                    <View style={styles.containerFriend}>
+                        <Text style={styles.textFriend}>
+                            {this.props.text}
+                        </Text>
+                    </View>
+                </View>
+            );
+        }
     }
 }
 
@@ -34,6 +51,7 @@ const styles = StyleSheet.create({
     containerFriend:{
         marginBottom: 10,
         marginRight: 10,
+        
         width: null,
         height: null,
         padding: 10,
@@ -49,5 +67,8 @@ const styles = StyleSheet.create({
     textFriend:{
         fontSize: 18,
         color: "black"
+    },
+    headerFriend:{
+        fontWeight: "700"
     }
 });
