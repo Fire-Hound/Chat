@@ -1,3 +1,5 @@
+##This is a dummy implementation of the server without any db
+
 from flask import Flask, request, make_response, Request
 from flask_restful import Resource, Api, reqparse
 import json
