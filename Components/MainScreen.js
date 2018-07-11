@@ -5,7 +5,7 @@ import Expo from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import ChatBubble from './ChatBubble'
 import {POST,GET} from './Network'
-let ip = "http://VikramCothur.pythonanywhere.com:/" //Edit it with your server IP
+let ip = "http://VikramCothur.pythonanywhere.com/" //Edit it with your server IP
 export default class MainScreen extends React.Component {
   state = {
     currentText: "",
